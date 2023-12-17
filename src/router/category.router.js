@@ -1,12 +1,17 @@
 const router = require('express').Router();
 
-router.get('/', (req,res) =>{
-    res.send("router Categoria")
+const Bodega = require('../model/category.model.js');
+
+router.get('/', async (req,res) =>{
+    
 });
 
 router.get('/:ID', (req,res) =>{});
 
-router.post('/', (req,res) =>{});
+
+router.post('/', async (req,res) =>{
+    await Bodega.sync();
+});
 
 router.put('/:ID', (req,res) =>{});
 

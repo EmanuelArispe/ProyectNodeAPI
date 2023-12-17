@@ -1,20 +1,8 @@
-const { Sequelize } = require('sequelize');
+const sequelize = require('./model.js');
 
-const sequelize = new Sequelize ('vinoteca', 'root','', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: 3306 
+class Product extends Model {}
+
+Product.init({},{
+    sequelize,
+    modelName: 'Product',
 });
-
-
-
-async function isConnected (){
-    try {
-        await sequelize.authenticate();
-        console.log('Connection to the database has been established successfully.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-      }
-}
-
-isConnected();
