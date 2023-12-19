@@ -1,6 +1,8 @@
+console.log("Entro a category router");
+
 const router = require('express').Router();
 
-const Bodega = require('../model/category.model.js');
+const Category = require('../model/category.model.js');
 
 router.get('/', async (req,res) =>{
     
@@ -10,7 +12,9 @@ router.get('/:ID', (req,res) =>{});
 
 
 router.post('/', async (req,res) =>{
-    await Bodega.sync();
+    const bodegas = await Category.findAll();
+
+    res.send(bodegas);
 });
 
 router.put('/:ID', (req,res) =>{});

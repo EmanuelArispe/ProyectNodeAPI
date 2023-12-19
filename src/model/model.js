@@ -1,3 +1,5 @@
+console.log("entro a model")
+
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize ('vinoteca', 'root','', {
@@ -8,15 +10,14 @@ const sequelize = new Sequelize ('vinoteca', 'root','', {
 
 
 // test para verificar si esta conectada a la DB.
-isConnected();
-
-async function isConnected (){
+(async ()=>{
     try {
         await sequelize.authenticate();
         console.log('Connection to the database has been established successfully.');
       } catch (error) {
         console.error('Unable to connect to the database:', error);
       }
-};
+})();
+
 
 module.exports = sequelize;

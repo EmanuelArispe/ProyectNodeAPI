@@ -1,9 +1,12 @@
+console.log("Entro a category model")
+
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('./model.js');
 
-class Bodega extends Model { }
 
-Bodega.init({
+class Category extends Model { }
+
+Category.init({
     id_bodega: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -22,18 +25,31 @@ Bodega.init({
         allowNull: false
     },
     descripcion: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     }
 },
     {
         sequelize,
-        modelName: 'Bodega',
+        modelName: 'Category',
         tableName: 'Bodegas',
-        timestamps: false // ... sacar marcas de agua
+        timestamps: false, // ... sacar marcas de agua
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_unicode_ci' 
     });
 
+    module.exports = Category;
 
+    const Product = require('./product.model.js');
 
+    Category.hasMany(Product, {
+        foreignKey: 'bodega' // Nombre de la clave foránea en el modelo de Product
+    });
 
-module.exports = Bodega;
+    (async () => {
+             Category.sync().then(() => {
+                                        console.log("Category table updated successfully")
+                                        })
+                            .catch((e) => { console.log('There was an error', e) })
+    })();
+
